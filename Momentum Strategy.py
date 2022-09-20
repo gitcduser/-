@@ -40,7 +40,6 @@ price_plot  = ['returns_dis_cum']
 for days in range(10,200,2):
     price_plot.append('%d Day' % days)
     data['position_%dd' % days] = np.where(data['returns'].rolling(days).mean()>0, 1, -1)
-    #data['position_%d' % days] = np.sign(data['returns'].rolling(days).mean())
     data['strategy_%dd' % days] = data['position_%dd' % days].shift(1) * data['returns']
     data['%d Day' % days] = (data['strategy_%dd' % days]+1).cumprod()
 df = data[price_plot]
